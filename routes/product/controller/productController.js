@@ -24,6 +24,20 @@ module.exports = {
       }
     });
   },
+  getProductByID: function(id, body, callback) {
+    Product.findById(
+      { _id: id },
+      body,
+      { new: true },
+      function (err, updatedPayload) {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, updatedPayload)
+        }
+      }
+    )
+  },
   updateProductByID: function (id, body, callback) {
     Product.findByIdAndUpdate(
       { _id: id },

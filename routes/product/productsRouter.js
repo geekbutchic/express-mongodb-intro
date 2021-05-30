@@ -29,6 +29,20 @@ router.post("/create-product", function (req, res) {
   });
 });
 
+router.get("/get-product-by-id/:id", function (req, res) {
+  productController.getProductByID(
+    req.params.id,
+    req.body,
+    function (err, updatedPayload) {
+      if (err) {
+        res.status(500).json({ message: "Error", error: err });
+      } else {
+        res.json({ message: "success", data: updatedPayload });
+      }
+    }
+  );
+});
+
 router.put("/update-product-by-id/:id", function (req, res) {
   productController.updateProductByID(
     req.params.id,
